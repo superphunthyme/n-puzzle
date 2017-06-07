@@ -47,3 +47,5 @@ _If the size of your board does not match **DIM^2** then a predetermined board w
 - Fixing memory issues in A\*
 - Method documentation
 - Add check for board solvability to test.c
+- Make a non-optimal solver
+- Command-line options
