@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
   init_board(b, tiles, DIM);
 
   clock_t start = clock();
-  a_star_solve(b);
+  //a_star_solve(b);
   diff = clock() - start;
   int msec = diff * 1000 / CLOCKS_PER_SEC;
   printf("A*: Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
