@@ -69,8 +69,8 @@ void a_star_solve(board *b) {
     linked_list *list_neighbours = list_create();
     neighbours(best_state->current, list_neighbours);
 
-    while(!isEmpty(list_neighbours)) {
-      neighbour = get(0, list_neighbours);
+    while(!list_is_empty(list_neighbours)) {
+      neighbour = list_get(0, list_neighbours);
       //board *ncopy = malloc(sizeof(board));
       //memcpy(ncopy, neighbour, sizeof(board));
       // TODO Avoid copying entire board?
@@ -80,7 +80,7 @@ void a_star_solve(board *b) {
         init_board_state(neighbour_state, neighbour, best_state, best_state->moves + 1);
         heap_insert(&states, &neighbour_state->score, neighbour_state);
       }
-      remove_elem(0, list_neighbours);
+      list_remove(0, list_neighbours);
     }
   }
 
@@ -130,19 +130,19 @@ int search(board *node, int g, int bound, int *counter) {
   board *neighbour;
   linked_list *list_neighbours = list_create();
   neighbours(node, list_neighbours);
-  while(!isEmpty(list_neighbours)) {
-    neighbour = get(0, list_neighbours);
+  while(!list_is_empty(list_neighbours)) {
+    neighbour = list_get(0, list_neighbours);
     t = search(neighbour, g + 1, bound, counter);
     if (t == FOUND) {
       print_board(neighbour);
-      destroy(list_neighbours);
+      list_destroy(list_neighbours);
       (*counter)++;
       return FOUND;
     }
     if (t < minimum) {
       minimum = t;
     }
-    remove_elem(0, list_neighbours);
+    list_remove(0, list_neighbours);
   }
   free(list_neighbours);
   return minimum;

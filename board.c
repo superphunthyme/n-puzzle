@@ -109,7 +109,7 @@ void neighbours(board *b, linked_list *l_neighbours) {
     swap_zero(bn, b->zero_location - 1);
     //printf("Neighbour 1:\n");
     //print_board(bn);
-    add(bn, l_neighbours);
+    list_add(bn, l_neighbours);
   }
   if(b->zero_location % b->dim < b->dim - 1 ) {
     board *bn = malloc(sizeof(board));
@@ -117,7 +117,7 @@ void neighbours(board *b, linked_list *l_neighbours) {
     swap_zero(bn, b->zero_location + 1);
     //printf("Neighbour 2:\n");
     //print_board(bn);
-    add(bn, l_neighbours);
+    list_add(bn, l_neighbours);
   }
   if(b->zero_location / b->dim > 0) {
     board *bn = malloc(sizeof(board));
@@ -125,7 +125,7 @@ void neighbours(board *b, linked_list *l_neighbours) {
     swap_zero(bn, b->zero_location - b->dim);
     //printf("Neighbour 3:\n");
     //print_board(bn);
-    add(bn, l_neighbours);
+    list_add(bn, l_neighbours);
   }
   if(b->zero_location / b->dim < b->dim - 1) {
     board *bn = malloc(sizeof(board));
@@ -133,7 +133,7 @@ void neighbours(board *b, linked_list *l_neighbours) {
     swap_zero(bn, b->zero_location + b->dim);
     //printf("Neighbour 4:\n");
     //print_board(bn);
-    add(bn, l_neighbours);
+    list_add(bn, l_neighbours);
   }
 }
 

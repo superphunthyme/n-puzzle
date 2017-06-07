@@ -29,12 +29,12 @@ typedef struct {
 
 linked_list *list_create();
 list_element *init_list_element();
-void destroy(linked_list *l);
-void add(T e, linked_list *l);
-void add_at(int index, T e, linked_list *l);
-void remove_elem(int index, linked_list *l);
-T get(int index, linked_list *l);
-void set(int index, T e, linked_list *l);
+void list_destroy(linked_list *l);
+void list_add(T e, linked_list *l);
+void list_add_at(int index, T e, linked_list *l);
+void list_remove(int index, linked_list *l);
+T list_get(int index, linked_list *l);
+void list_set(int index, T e, linked_list *l);
 /* In terms of value or exact object? */
-bool contains(T e, linked_list *l);
-bool isEmpty(linked_list *l);
+bool list_contains(T e, linked_list *l);
+bool list_is_empty(linked_list *l);

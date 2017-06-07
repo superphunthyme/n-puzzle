@@ -21,7 +21,7 @@ list_element* init_list_element(T e) {
     return elem;
 }
 
-void destroy(linked_list* l) {
+void list_destroy(linked_list* l) {
     struct list_element* head = l->head;
     struct list_element* p;
     while ((p = head) != NULL) {
@@ -34,7 +34,7 @@ void destroy(linked_list* l) {
 }
 
 // Add at front for constant time addition
-void add(T e, linked_list* l) {
+void list_add(T e, linked_list* l) {
     list_element* elem = init_list_element(e);
     struct list_element* n = l->head;
     l->head = elem;
@@ -42,7 +42,7 @@ void add(T e, linked_list* l) {
     l->size++;
 }
 
-void add_at(int index, T e, linked_list* l) {
+void list_add_at(int index, T e, linked_list* l) {
     if (index > l->size || index < 0) {
         printf("Element must be placed between 0 and the size of the list\n");
         return;
@@ -63,12 +63,12 @@ void add_at(int index, T e, linked_list* l) {
     }
 }
 
-void remove_elem(int index, linked_list* l) {
+void list_remove(int index, linked_list* l) {
     if (index > l->size - 1 || index < 0) {
         printf("List does not have an element here\n");
         return;
     }
-    if (isEmpty(l)) {
+    if (list_is_empty(l)) {
         printf("Cannot remove from empty list\n");
         return;
     }
@@ -96,7 +96,7 @@ void remove_elem(int index, linked_list* l) {
     }
 }
 
-T get(int index, linked_list* l) {
+T list_get(int index, linked_list* l) {
     if (index > l->size - 1 || index < 0) {
         printf("List does not have an element here\n");
     }
@@ -107,12 +107,12 @@ T get(int index, linked_list* l) {
     return p->value;
 }
 
-void set(int index, T e, linked_list* l) {
+void list_set(int index, T e, linked_list* l) {
         if (index > l->size - 1 || index < 0) {
             printf("List does not have an element here\n");
             return;
         }
-        if (isEmpty(l)) {
+        if (list_is_empty(l)) {
             printf("Cannot remove from empty list\n");
             return;
         }
@@ -124,7 +124,7 @@ void set(int index, T e, linked_list* l) {
         p->value = e;
 }
 
-bool contains(T e, linked_list* l) {
+bool list_contains(T e, linked_list* l) {
     bool found = false;
     struct list_element* p = l->head;
     while (p != NULL) {
@@ -138,7 +138,7 @@ bool contains(T e, linked_list* l) {
     }
     return found;
 }
-bool isEmpty(linked_list* l) {
+bool list_is_empty(linked_list* l) {
     //return (l->head == NULL);
     return l->size == 0;
 }
