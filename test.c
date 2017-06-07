@@ -12,22 +12,26 @@
 
 void a_star_solve(board *b);
 int ida_star_solve(board *b);
-int search(board *node, int g, int bound, int* counter);
+int search(board *node, int g, int bound, int *counter);
 
 int main(int argc, char *argv[]) {
 
   // Uncomment to seed if initializing random board
-  //srand(time(NULL));
+  srand(time(NULL));
 
   clock_t diff = 0;
   board *b = &(board){};
-  int tiles[DIM * DIM] = {5, 6, 3, 4, 8, 0, 1, 15, 10, 7, 2, 11, 12, 9, 14, 13};
   if (argc == DIM * DIM + 1) {
+    int tiles[DIM * DIM];
     for(int i = 1; i < argc; ++i) {
       tiles[i-1] = atoi(argv[i]);
     }
+    init_board(b, tiles, DIM);
   }
-  init_board(b, tiles, DIM);
+  else {
+    init_board_random(b, DIM);
+  }
+  print_board(b);
 
   clock_t start = clock();
   //a_star_solve(b);
