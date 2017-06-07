@@ -1,0 +1,5 @@
+# Vim sWap files
+*.swp
+
+# Binary
+n-puzzle
