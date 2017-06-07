@@ -6,11 +6,14 @@ This solver finds the optimal solution to a puzzle (least moves required to solv
 
 ## Requirements
 gcc (need GNU extensions for heap)
+
 Heap is not required for IDA\* solver, so you can remove heap.c/h and A\* solver, in which case no dependencies are necessary.
 
 ## Installation
 Run `make`
+
 Board size is specified at compile time (may change this).
+
 The macro **DIM** in board.h defines the size of aboard.
 
 ## Use
