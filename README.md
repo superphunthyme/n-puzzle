@@ -17,7 +17,7 @@ Board size is specified at compile time (may change this).
 The macro **DIM** in board.h defines the size of aboard.
 
 ## Use
-Run `./n-puzzle` to use a predetermined (may switch to random) board
+Run `./n-puzzle` to use a random board
 
 ### Specify a board as follows:
 `./n-puzzle` 5 6 3 4 8 1 2 15 10 7 0 11 12 9 14 13
@@ -30,8 +30,7 @@ for the board
 | 10 	| 7 	| 0 	| 11 	|
 | 12 	| 9 	| 14 	| 13 	|
 
-otherwise a predetermined board will be used
-(currently fixed but may be switched to random)
+otherwise a random board will be used
 
 _If the size of your board does not match **DIM^2** then a predetermined board will be used_
 
