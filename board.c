@@ -97,42 +97,29 @@ void swap_zero(board *b, int location) {
   b->zero_location = location;
 }
 
-// FIXME Need to understand lists a bit better (or use c++)
-// // Make void return type, store pointer to head of list in last parmeter
 void neighbours(board *b, linked_list *l_neighbours) {
-  // list_create new array of boards
-  // board neghbours[] = init_board;
-  //linked_list *neighbours = list_create();
   if(b->zero_location % b->dim > 0) {
     board *bn = malloc(sizeof(board));
     init_board(bn, b->tiles, b->dim);
     swap_zero(bn, b->zero_location - 1);
-    //printf("Neighbour 1:\n");
-    //print_board(bn);
     list_add(bn, l_neighbours);
   }
   if(b->zero_location % b->dim < b->dim - 1 ) {
     board *bn = malloc(sizeof(board));
     init_board(bn, b->tiles, b->dim);
     swap_zero(bn, b->zero_location + 1);
-    //printf("Neighbour 2:\n");
-    //print_board(bn);
     list_add(bn, l_neighbours);
   }
   if(b->zero_location / b->dim > 0) {
     board *bn = malloc(sizeof(board));
     init_board(bn, b->tiles, b->dim);
     swap_zero(bn, b->zero_location - b->dim);
-    //printf("Neighbour 3:\n");
-    //print_board(bn);
     list_add(bn, l_neighbours);
   }
   if(b->zero_location / b->dim < b->dim - 1) {
     board *bn = malloc(sizeof(board));
     init_board(bn, b->tiles, b->dim);
     swap_zero(bn, b->zero_location + b->dim);
-    //printf("Neighbour 4:\n");
-    //print_board(bn);
     list_add(bn, l_neighbours);
   }
 }

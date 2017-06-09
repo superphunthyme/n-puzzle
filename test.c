@@ -75,9 +75,6 @@ void a_star_solve(board *b) {
 
     while(!list_is_empty(list_neighbours)) {
       neighbour = list_get(0, list_neighbours);
-      //board *ncopy = malloc(sizeof(board));
-      //memcpy(ncopy, neighbour, sizeof(board));
-      // TODO Avoid copying entire board?
       init_board(neighbour, neighbour->tiles, neighbour->dim);
       if(!best_state->previous || !equals(neighbour, best_state->previous->current)) {
         state *neighbour_state = malloc(sizeof(state));
