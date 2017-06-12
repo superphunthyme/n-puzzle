@@ -6,7 +6,7 @@
 #include <string.h>
 
 // TODO Maybe make dynamic? incl size. Use malloc
-void *init_board_random(board *b, int size) {
+void init_board_random(board *b, int size) {
   //board *b = &(board){.dim = size};
   //board *b = malloc(sizeof(board));
   b->dim = size;
@@ -15,10 +15,9 @@ void *init_board_random(board *b, int size) {
   } while (!is_solvable(b));
   b->manhattan = manhattan(b);
   b->zero_location = zero_location(b);
-  return b;
 }
 
-void *init_board(board *b, int tiles[], int size) {
+void init_board(board *b, int tiles[], int size) {
   b->dim = size;
   //memcpy(b->tiles, tiles, size * size * sizeof(int));
   for (int i = 0; i < b->dim * b->dim; ++i) {
@@ -26,7 +25,6 @@ void *init_board(board *b, int tiles[], int size) {
   }
   b->manhattan = manhattan(b);
   b->zero_location = zero_location(b);
-  return b;
 }
 
 int zero_location(board *b) {
