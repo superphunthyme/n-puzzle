@@ -13,8 +13,8 @@ typedef struct board {
   int zero_location;
 } board;
 
-void *init_board_random(board *b, int size);
-void *init_board(board *b, int tiles[], int size);
+void init_board_random(board *b, int size);
+void init_board(board *b, int tiles[], int size);
 int zero_location(board *b);
 bool is_solved(board *b);
 bool is_solvable(board *b);
