@@ -28,11 +28,17 @@ int main(int argc, char *argv[]) {
       tiles[i-1] = atoi(argv[i]);
     }
     init_board(b, tiles, DIM);
+    if(!is_solvable(b)) {
+        fprintf(stderr, "Puzzle is not solvable.\n");
+        return 1;
+    }
   }
   else {
     init_board_random(b, DIM);
   }
+  printf("Initial Board:\n");
   print_board(b);
+  printf("\n");
 
   clock_t start = clock();
   //a_star_solve(b);
