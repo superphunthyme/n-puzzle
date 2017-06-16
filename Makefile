@@ -1,5 +1,6 @@
 CC=gcc
-CC_OPT=-Wall -std=gnu11 -g -O2
+CC_OPT=-Wall -std=gnu11 -O2
+CC_DBG_OPT=-Wall -std=gnu11
 PRGM=n-puzzle
 DEPS=test.c board.c state.c heap.c linked-list.c
 
@@ -8,3 +9,6 @@ MAIN: $(DEPS)
 
 clean:
 	rm $(PRGM)
+
+debug:
+	$(CC) $(CC_DBG_OPT) $(DEPS) -g -o $(PRGM)

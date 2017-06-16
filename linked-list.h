@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include "board.h"
 
-typedef struct board* T;
+typedef void* T;
 
 #define check_pointer(p)          \
   if (!p) {                     \

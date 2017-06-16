@@ -5,10 +5,7 @@
 #include <time.h>
 #include <string.h>
 
-// TODO Maybe make dynamic? incl size. Use malloc
 void init_board_random(board *b, int size) {
-  //board *b = &(board){.dim = size};
-  //board *b = malloc(sizeof(board));
   b->dim = size;
   do {
     generate_random_tiles(b);
@@ -19,10 +16,7 @@ void init_board_random(board *b, int size) {
 
 void init_board(board *b, int tiles[], int size) {
   b->dim = size;
-  //memcpy(b->tiles, tiles, size * size * sizeof(int));
-  for (int i = 0; i < b->dim * b->dim; ++i) {
-    b->tiles[i] = tiles[i];
-  }
+  memcpy(b->tiles, tiles, size * size * sizeof(int));
   b->manhattan = manhattan(b);
   b->zero_location = zero_location(b);
 }
@@ -98,25 +92,25 @@ void swap_zero(board *b, int location) {
 void neighbours(board *b, linked_list *l_neighbours) {
   if(b->zero_location % b->dim > 0) {
     board *bn = malloc(sizeof(board));
-    init_board(bn, b->tiles, b->dim);
+    *bn = *b;
     swap_zero(bn, b->zero_location - 1);
     list_add(bn, l_neighbours);
   }
   if(b->zero_location % b->dim < b->dim - 1 ) {
     board *bn = malloc(sizeof(board));
-    init_board(bn, b->tiles, b->dim);
+    *bn = *b;
     swap_zero(bn, b->zero_location + 1);
     list_add(bn, l_neighbours);
   }
   if(b->zero_location / b->dim > 0) {
     board *bn = malloc(sizeof(board));
-    init_board(bn, b->tiles, b->dim);
+    *bn = *b;
     swap_zero(bn, b->zero_location - b->dim);
     list_add(bn, l_neighbours);
   }
   if(b->zero_location / b->dim < b->dim - 1) {
     board *bn = malloc(sizeof(board));
-    init_board(bn, b->tiles, b->dim);
+    *bn = *b;
     swap_zero(bn, b->zero_location + b->dim);
     list_add(bn, l_neighbours);
   }

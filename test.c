@@ -13,6 +13,7 @@
 void a_star_solve(board *b);
 int ida_star_solve(board *b);
 int search(board *node, int g, int bound, int *counter);
+void free_states(int *key, state *value);
 
 int main(int argc, char *argv[]) {
 
@@ -55,7 +56,7 @@ void a_star_solve(board *b) {
     return;
   }
 
-  state *initial_state = &(state){};
+  state *initial_state = malloc(sizeof(state));
   init_board_state(initial_state, b, NULL, 0);
 
   heap states;
@@ -63,26 +64,33 @@ void a_star_solve(board *b) {
   heap_insert(&states, &initial_state->score, initial_state);
 
   int *min_key;
-  state *best_state;
-  int counter = 0;
   board *neighbour;
-  best_state = initial_state;
+  state *best_state = initial_state;
+  state *neighbour_state;
+  int counter = 0;
 
-  while(best_state->current->manhattan != 0) {
+  linked_list *to_delete = list_create();
+
+  while(1) {
     heap_delmin(&states, &min_key, &best_state);
+    list_add(best_state, to_delete);
+    if(best_state->current->manhattan == 0 ) {
+      break;
+    }
     linked_list *list_neighbours = list_create();
     neighbours(best_state->current, list_neighbours);
 
     while(!list_is_empty(list_neighbours)) {
       neighbour = list_get(0, list_neighbours);
-      init_board(neighbour, neighbour->tiles, neighbour->dim);
       if(!best_state->previous || !equals(neighbour, best_state->previous->current)) {
-        state *neighbour_state = malloc(sizeof(state));
+        neighbour_state = malloc(sizeof(state));
+        check_pointer(neighbour_state);
         init_board_state(neighbour_state, neighbour, best_state, best_state->moves + 1);
         heap_insert(&states, &neighbour_state->score, neighbour_state);
       }
       list_remove(0, list_neighbours);
     }
+    free(list_neighbours);
   }
 
 
@@ -91,8 +99,21 @@ void a_star_solve(board *b) {
     print_board(best_state->current);
     best_state = best_state->previous;
   }
+
+  // Freeing all states popped from heap
+  while(!list_is_empty(to_delete)) {
+    initial_state = list_get(0, to_delete);
+    free(initial_state->current);
+    list_remove(0, to_delete);
+  }
+  free(to_delete);
+
+  // Freeing states left on heap
+  heap_foreach(&states, free_states);
+
   print_board(b);
   printf("Solved in %d moves\n", counter);
+  heap_destroy(&states);
 }
 
 int ida_star_solve(board *b) {
@@ -147,4 +168,9 @@ int search(board *node, int g, int bound, int *counter) {
   }
   free(list_neighbours);
   return minimum;
+}
+
+void free_states(int *key, state *value) {
+  free(value->current);
+  free(value);
 }
