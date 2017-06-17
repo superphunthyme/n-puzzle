@@ -5,7 +5,7 @@ A solver for the classic sliding tile game by Sam Loyd.
 This solver finds the optimal solution to a puzzle (least moves required to solve). As a result the solver may not find the solution in the quickest amount of time, but will guarantee optimality.
 
 ## Requirements
-gcc (need GNU extensions for heap)
+Standard C with GNU extensions for heap
 
 Heap is not required for IDA\* solver, so you can remove heap.c/h and A\* solver, in which case no dependencies are necessary.
 
