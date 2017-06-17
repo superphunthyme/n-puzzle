@@ -19,8 +19,8 @@ The macro **DIM** in board.h defines the size of aboard.
 ## Use
 Run `./n-puzzle` to use a random board
 
-### Specify a board as follows:
-`./n-puzzle` 5 6 3 4 8 1 2 15 10 7 0 11 12 9 14 13
+### Specify a board to solve:
+E.g. `./n-puzzle` 5 6 3 4 8 1 2 15 10 7 0 11 12 9 14 13
 for the board
 
 |||||
@@ -32,7 +32,7 @@ for the board
 
 otherwise a random board will be used
 
-_If the size of your board does not match **DIM^2** then a predetermined board will be used_
+_If the size of your board does not match **DIM^2** then a random board will be used_
 
 ## Solver
 - Currently using Manhattan distance heuristic
@@ -41,7 +41,7 @@ _If the size of your board does not match **DIM^2** then a predetermined board w
 ## Notes
 - A\*, by nature, uses a lot of memory, so is unsuitable for many boards of size 4x4 and above
 - Due to this IDA\* is much more reliable for larger boards, albeit slower
-- Better heuristics exist, I am on implementing them
+- Better heuristics exist, I am planning on implementing them
 
 ## To be done
 - Coding style consistency
