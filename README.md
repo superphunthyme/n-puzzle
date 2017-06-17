@@ -39,9 +39,9 @@ _If the size of your board does not match **DIM^2** then a predetermined board w
 - Two solvers, A\* and IDA\* search
 
 ## Notes
-- A\* uses a lot of memory which isn't managed that well at the moment
-- A\*, by nature, uses a lot of memory anyways, so is unsuitable for many boards of size 4x4 and above
-- IDA\* is much more reliable, albeit slower
+- A\*, by nature, uses a lot of memory, so is unsuitable for many boards of size 4x4 and above
+- Due to this IDA\* is much more reliable for larger boards, albeit slower
+- Better heuristics exist, I am on implementing them
 
 ## To be done
 - Coding style consistency
