@@ -7,6 +7,8 @@
 #define FOUND -1
 #define NOT_FOUND -2
 
+static int search(board *node, int g, int bound, int *counter);
+
 void a_star_solve(board *b) {
 
   if (is_solved(b)) {
@@ -88,7 +90,7 @@ int ida_star_solve(board *b) {
     if (t == FOUND) {
       print_board(b);
       printf("Solved in %d moves\n", *counter);
-      return bound;
+      return 0;
     }
     if (t == __INT_MAX__) {
       return NOT_FOUND;
@@ -97,7 +99,7 @@ int ida_star_solve(board *b) {
   }
 }
 
-int search(board *node, int g, int bound, int *counter) {
+static int search(board *node, int g, int bound, int *counter) {
   int f = g + node->manhattan;
   int t;
   if (f > bound) {
