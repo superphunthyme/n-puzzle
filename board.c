@@ -5,6 +5,11 @@
 #include <time.h>
 #include <string.h>
 
+static int zero_location(board *b);
+static int manhattan(board *b);
+static void shuffle_tiles(int *tiles, size_t n);
+static void generate_random_tiles(board *b);
+
 void init_board_random(board *b, int size) {
   b->dim = size;
   do {
@@ -21,7 +26,7 @@ void init_board(board *b, int tiles[], int size) {
   b->zero_location = zero_location(b);
 }
 
-int zero_location(board *b) {
+static int zero_location(board *b) {
   for (int i = 0; i < b->dim * b->dim; ++i) {
     if (b->tiles[i] == 0) {
       return i;
@@ -46,13 +51,13 @@ bool is_solvable(board *b) {
   return inversions % 2 == 0;
 }
 
-void generate_random_tiles(board *b) {
+static void generate_random_tiles(board *b) {
   for (int i = 0; i < b->dim * b->dim; ++i)
     b->tiles[i] = i;
   shuffle_tiles(b->tiles, b->dim * b->dim);
 }
 
-int manhattan(board *b) {
+static int manhattan(board *b) {
   int manhattan = 0;
   for (int i = 0; i < b->dim * b->dim; ++i) {
     if (b->tiles[i] != 0) {
@@ -126,7 +131,7 @@ void print_board(board *b) {
   printf("\n");
 }
 
-void shuffle_tiles(int *array, size_t n)
+static void shuffle_tiles(int *array, size_t n)
 {
   if (n > 1)
   {
