@@ -46,6 +46,5 @@ _If the size of your board does not match **DIM^2** then a random board will be 
 ## To be done
 - Coding style consistency
 - Implementing an improved heuristic
-- Method documentation
 - Make a non-optimal solver
 - Command-line options
