@@ -66,6 +66,21 @@ static int manhattan(board *b) {
       int correct_row = (b->tiles[i] -1) / b->dim;
       int correct_col = (b->tiles[i] -1) % b->dim;
       manhattan += abs(correct_row - current_row) + abs(current_col - correct_col);
+
+      // Linear conflict heuristic
+      if(current_row == correct_row) {
+        for (int j = b->dim * current_row; j < b->dim * current_row + current_col; ++j) {
+          int j_current_row = j / b->dim;
+          int j_correct_row = (b->tiles[j] -1) / b->dim;
+          if(j_current_row == j_correct_row) {
+            int j_current_col = j % b->dim;
+            int j_correct_col = (b->tiles[j -1]) % b->dim;
+            if (correct_col < j_correct_col && current_col > j_current_col) {
+              manhattan += 2;
+            }
+          }
+        }
+      }
     }
   }
   return manhattan;
@@ -81,17 +96,10 @@ bool equals(board *b1, board *b2) {
 }
 
 void swap_zero(board *b, int location) {
-  int current_row = location / b->dim;
-  int current_col = location % b->dim;
-  int correct_row = (b->tiles[location] - 1) / b->dim;
-  int correct_col = (b->tiles[location] - 1) % b->dim;
-  int zero_row = b->zero_location / b->dim;
-  int zero_col = b->zero_location % b->dim;
-  b->manhattan -= abs(correct_row - current_row) + abs(correct_col - current_col);
-  b->manhattan += abs(zero_row - correct_row) + abs(zero_col - correct_col);
   b->tiles[b->zero_location] = b->tiles[location];
   b->tiles[location] = 0;
   b->zero_location = location;
+  b->manhattan = manhattan(b);
 }
 
 void neighbours(board *b, linked_list *l_neighbours) {
